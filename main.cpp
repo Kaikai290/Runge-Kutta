@@ -1,13 +1,14 @@
 #include<iostream>
 #include<cmath>
 
-#include"BasicWindowsAPI/win64_main.cpp"
+#include "BasicWindowsAPI/win64_main.cpp"
+#include "render.cpp"
+#include "model.h"
 
-void MainUpdate(graphics_offscreen_buffer *Buffer, application_memory *Memory)
+void MainUpdate(application_state *ApplicationState)
 {
     
-    application_state *ApplicationState = (application_state *)Memory->PermanentStorage;
-    if(!Memory->IsInitialized)
+    if(!ApplicationState->IsInitialized)
     {
         ApplicationState->CartPendulum.Gravity = 9.8;
 
@@ -32,6 +33,26 @@ void MainUpdate(graphics_offscreen_buffer *Buffer, application_memory *Memory)
         ApplicationState->CartPendulum.Pendulum.XAccelerationOfPendulum = 0;
         ApplicationState->CartPendulum.Pendulum.YAccelerationOfPendulum = 0;
 
-        Memory->IsInitialized = true;
+        ApplicationState->IsInitialized = true;
     }
+    return;
+}
+
+void Render(graphics_offscreen_buffer *Buffer, application_state *ApplicationState)
+{
+
+    uint8_t *Row = (uint8_t *)Buffer->Memory;
+    for(int Y = 0; Y < Buffer->Height; ++Y)
+    {
+        uint32_t *Pixel = (uint32_t *)Row;
+        for(int X = 0; X < Buffer->Width; ++X)
+        {
+            RenderCart(ApplicationState->CartPendulum, Buffer, Y, X, Pixel);
+            RenderPendulum(ApplicationState->CartPendulum, Buffer, Y, X, Pixel);
+            Pixel++;
+        }
+        Row += Buffer->Pitch;
+    }
+
+    return;
 }
