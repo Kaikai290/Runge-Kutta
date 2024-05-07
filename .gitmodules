@@ -1,0 +1,3 @@
+[submodule "BasicWindowsAPI"]
+	path = BasicWindowsAPI
+	url = https://github.com/Kaikai290/BasicWindowsAPI.git
