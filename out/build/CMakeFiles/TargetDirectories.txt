@@ -1,3 +1,0 @@
-W:/Runge-Kutta/out/build/CMakeFiles/Runge-Kutta.dir
-W:/Runge-Kutta/out/build/CMakeFiles/ALL_BUILD.dir
-W:/Runge-Kutta/out/build/CMakeFiles/ZERO_CHECK.dir
