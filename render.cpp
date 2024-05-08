@@ -26,12 +26,18 @@ void RenderPendulum(application_state *ApplicationState, graphics_offscreen_buff
     double Angle =  (- ApplicationState->CartPendulum.Pendulum.XPos + ApplicationState->CartPendulum.Cart.XPos);
     double XPosition = (Scale * (Angle)) + ApplicationState->CartPendulum.Cart.XPos;
     double YPosition = Scale * ApplicationState->CartPendulum.Pendulum.YPos;
-    double Radius = 10;
-    if((pow((double)X - XPosition - (double)XOrigin, 2) + pow((double)Y - YPosition - (double)YOrigin, 2)) < pow(Radius, 2))
+    double RadiusSquared = 100;
+    double XCirclePos = (double)X - XPosition - (double)XOrigin;
+    double XCirclePosSquared = (XCirclePos * XCirclePos);
+    double YCirclePos = (double)Y - YPosition - (double)YOrigin;
+    double YCirclePosSquared = (YCirclePos * YCirclePos);
+    if((XCirclePosSquared + YCirclePosSquared) < RadiusSquared)
     {
         *Pixel = 0x123456;
     }
 }
+
+//TODO: Make this run smoother, i.e Incorprate proper maths functions
 void RenderRod(application_state *ApplicationState, graphics_offscreen_buffer *Buffer, int Y, int X, unsigned int *Pixel)
 {
     double gradX = ApplicationState->CartPendulum.Cart.XPos - (ApplicationState->CartPendulum.Pendulum.XPos);
@@ -48,9 +54,6 @@ void RenderRod(application_state *ApplicationState, graphics_offscreen_buffer *B
         
         return;
     }
-    // double XC = (double) ApplicationState->CartPendulum.Cart.XPos + (double) X + Buffer->Width/2;
-    // double XA = ((double)XC) * Gradient;
-    // int XB = (int)XA;
     if((int)((X - ApplicationState->CartPendulum.Cart.XPos - Buffer->Width/2)* Gradient) + Buffer->Height/2 == (int)Y || (int)((X + 1 - ApplicationState->CartPendulum.Cart.XPos - Buffer->Width/2)* Gradient) + Buffer->Height/2 == (int)Y)
     {
         if(X  - Buffer->Width/2 < ApplicationState->CartPendulum.Cart.XPos && ApplicationState->CartPendulum.Cart.XPos > ApplicationState->CartPendulum.Pendulum.XPos)
