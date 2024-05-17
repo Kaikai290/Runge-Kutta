@@ -5,10 +5,8 @@ struct cart
     double Mass; 
     double XPos;
     double YPos;
-    double XSpeedOfCart;
-    double YSpeedOfCart;
-    double XAccelerationOfCart;
-    double YAccelerationOfCart;
+    double SpeedOfCart;
+    double AccelerationOfCart;
     double XForceActingOnCart;
 };
 
@@ -19,10 +17,8 @@ struct pendulum
     double Mass;
     double XPos;
     double YPos;
-    double XSpeedOfPendulum;
-    double YSpeedOfPendulum;
-    double XAccelerationOfPendulum;
-    double YAccelerationOfPendulum;
+    double SpeedOfPendulum;
+    double AccelerationOfPendulum;
 };
 
 struct model
