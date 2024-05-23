@@ -24,7 +24,7 @@ void MainUpdate(application_state *ApplicationState)
         ApplicationState->CartPendulum.Cart.XForceActingOnCart = 0;
         
         ApplicationState->CartPendulum.Pendulum.LengthOfPendulum = 1;
-        ApplicationState->CartPendulum.Pendulum.AngleOfPendulum = 3.14159265359;
+        ApplicationState->CartPendulum.Pendulum.AngleOfPendulum = 3.1f;
         ApplicationState->CartPendulum.Pendulum.Mass = 1;
         ApplicationState->CartPendulum.Pendulum.XPos = ApplicationState->CartPendulum.Cart.XPos - ApplicationState->CartPendulum.Pendulum.LengthOfPendulum * sin(ApplicationState->CartPendulum.Pendulum.AngleOfPendulum);
         ApplicationState->CartPendulum.Pendulum.YPos = ApplicationState->CartPendulum.Pendulum.LengthOfPendulum * cos(ApplicationState->CartPendulum.Pendulum.AngleOfPendulum);
@@ -36,8 +36,8 @@ void MainUpdate(application_state *ApplicationState)
     //ApplicationState->CartPendulum.Pendulum.AngleOfPendulum += 0.01f;
     //ApplicationState->CartPendulum.Cart.XPos = 150*sin(ApplicationState->CartPendulum.Pendulum.AngleOfPendulum);
     RK4(&ApplicationState->CartPendulum);
-    ApplicationState->CartPendulum.Pendulum.XPos = ApplicationState->CartPendulum.Cart.XPos - ApplicationState->CartPendulum.Pendulum.LengthOfPendulum * sin(ApplicationState->CartPendulum.Pendulum.AngleOfPendulum);
-    ApplicationState->CartPendulum.Pendulum.YPos = ApplicationState->CartPendulum.Pendulum.LengthOfPendulum * cos(ApplicationState->CartPendulum.Pendulum.AngleOfPendulum);
+    ApplicationState->CartPendulum.Pendulum.XPos =  ApplicationState->CartPendulum.Cart.XPos - ApplicationState->CartPendulum.Pendulum.LengthOfPendulum * sin(ApplicationState->CartPendulum.Pendulum.AngleOfPendulum);
+    ApplicationState->CartPendulum.Pendulum.YPos = - ApplicationState->CartPendulum.Pendulum.LengthOfPendulum * cos(ApplicationState->CartPendulum.Pendulum.AngleOfPendulum);
     printf_s("%.02f", ApplicationState->CartPendulum.Pendulum.AngleOfPendulum);
 }
 
